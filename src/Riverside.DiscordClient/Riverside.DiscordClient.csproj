@@ -6,12 +6,12 @@
 		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<AssemblyName>MicaDiscord</AssemblyName>
-		<RootNamespace>MicaDiscord</RootNamespace>
+		<AssemblyName>Riverside.DiscordClient</AssemblyName>
+		<RootNamespace>Riverside.DiscordClient</RootNamespace>
 		<Version>1.9.0</Version>
 		<UseWindowsForms>True</UseWindowsForms>
-		<PackageIcon>Mica Discord.png</PackageIcon>
-		<ApplicationIcon>Mica Discord.ico</ApplicationIcon>
+		<PackageIcon>Assets\Mica Discord.png</PackageIcon>
+		<ApplicationIcon>Assets\Mica Discord.ico</ApplicationIcon>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<SupportedOSPlatformVersions>10.0.19041.0</SupportedOSPlatformVersions>
 		<RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
@@ -50,13 +50,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="Mica Discord.ico">
+		<Content Include="Presentation\MicaDiscordScript.js">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="MicaDiscordScript.js">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="The CSS.css">
+		<Content Include="Presentation\The CSS.css">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="JupyterLite/**">
@@ -81,6 +78,9 @@
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Riverside.DiscordClient.Core\Riverside.DiscordClient.Core.csproj" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ApplicationDefinition Update="App.xaml">
@@ -100,20 +100,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="Resources\Mica Discord.png">
+	  <Content Update="Assets\Mica Discord.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="Resources\Mica Discord.ico">
+		<None Update="Assets\Mica Discord.ico">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 		<None Update="Settings.settings">
 		  <Generator>SettingsSingleFileGenerator</Generator>
 		  <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
-		<None Update="The CSS - Fluent.css">
+		<None Update="Presentation\The CSS - Fluent.css">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

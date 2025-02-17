@@ -7,11 +7,13 @@ using System.Windows.Forms;
 using WPFApplication = System.Windows.Application;
 using WV2::Microsoft.Web.WebView2.Core;
 using System.IO;
+using MicaDiscord;
 #if WINDOWS10_0_17763_0_OR_GREATER
 using Microsoft.Windows.ApplicationModel.DynamicDependency;
 #endif
-using MW = MicaDiscord.MainWindow;
-namespace MicaDiscord;
+using MW = Riverside.DiscordClient.MainWindow;
+
+namespace Riverside.DiscordClient;
 
 /// <summary>
 /// Interaction logic for App.xaml

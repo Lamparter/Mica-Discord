@@ -1,17 +1,22 @@
-﻿<Application x:Class="MicaDiscord.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="Riverside.DiscordClient.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ControlTemplate x:Key="NoDisabledBackground" TargetType="{x:Type Button}">
-            <Border BorderBrush="Transparent" x:Name="Border" Padding="10" Background="Transparent">
-                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <Border
+                x:Name="Border"
+                Padding="10"
+                Background="Transparent"
+                BorderBrush="Transparent">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter TargetName="Border" Property="Background">
                         <Setter.Value>
-                            <SolidColorBrush Color="Transparent"></SolidColorBrush>
+                            <SolidColorBrush Color="Transparent" />
                         </Setter.Value>
                     </Setter>
                     <Setter TargetName="Border" Property="Opacity">
@@ -25,7 +30,11 @@
                         <Setter.Value>
                             <SolidColorBrush>
                                 <SolidColorBrush.Color>
-                                    <Color A="25" R="255" G="255" B="255"/>
+                                    <Color
+                                        A="25"
+                                        B="255"
+                                        G="255"
+                                        R="255" />
                                 </SolidColorBrush.Color>
                             </SolidColorBrush>
                         </Setter.Value>

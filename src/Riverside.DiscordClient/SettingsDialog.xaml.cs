@@ -1,4 +1,4 @@
-﻿using CustomPInvoke;
+﻿using Riverside.DiscordClient.Core.PInvoke;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using Windows.Storage;
 #endif
 
-namespace MicaDiscord;
+namespace Riverside.DiscordClient;
 #if WINDOWS10_0_17763_0_OR_GREATER
 static class Setting {
     static ApplicationDataContainer ApplicationSetting = ApplicationData.Current.LocalSettings;

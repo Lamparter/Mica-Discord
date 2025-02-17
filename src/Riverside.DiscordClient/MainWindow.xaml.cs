@@ -12,7 +12,7 @@ using System.Windows.Shell;
 #if WINDOWS10_0_17763_0_OR_GREATER
 using Windows.UI.ViewManagement;
 #endif
-using AccentColorTypes = CustomPInvoke.UxTheme.AccentColorTypes;
+using AccentColorTypes = Riverside.DiscordClient.Core.PInvoke.UxTheme.AccentColorTypes;
 using System.IO;
 using System.Windows.Input;
 using System.Windows.Forms;
@@ -29,10 +29,12 @@ using SysDrawColor = System.Drawing.Color;
 using Color = System.Windows.Media.Color;
 using Button = System.Windows.Controls.Button;
 using Control = System.Windows.Forms.Control;
-namespace MicaDiscord;
 #if WINDOWS10_0_17763_0_OR_GREATER
-using AppSetting = MicaDiscord.Setting;
+using AppSetting = Riverside.DiscordClient.Setting;
 #endif
+
+namespace Riverside.DiscordClient;
+
 public partial class MainWindow : Window
 {
     public static int WindowsMajorNumber = Environment.OSVersion.Version.Major;
@@ -198,9 +200,9 @@ public partial class MainWindow : Window
         IsVisibleChanged += (_, _) => RefreshFrame();
 #if WINDOWS10_0_17763_0_OR_GREATER
 
-        void RefreshDarkMode(bool dark) => CustomPInvoke.DwmApi.SetWindowAttribute(
+        void RefreshDarkMode(bool dark) => Core.PInvoke.DwmApi.SetWindowAttribute(
             Handle,
-            CustomPInvoke.DwmApi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+            Core.PInvoke.DwmApi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
             dark ? 1 : 0
         );
         ThemeChanged += () => RefreshDarkMode(dark: Dark);
@@ -210,7 +212,7 @@ public partial class MainWindow : Window
         }
         
         //RefreshDarkMode(dark: Dark);
-        SetBackdrop((CustomPInvoke.BackdropType)Enum.Parse(typeof(CustomPInvoke.BackdropType), AppSetting.BackdropType, ignoreCase: true));
+        SetBackdrop((Core.PInvoke.BackdropType)Enum.Parse(typeof(Core.PInvoke.BackdropType), AppSetting.BackdropType, ignoreCase: true));
 #else
         ThemeChanged += RefreshFrame;
 #endif
@@ -375,7 +377,7 @@ console.log('%cDO NOT Paste ANYTHING that you do not understand how it works.', 
                 }
                 */
                 this.Dark = Dark;
-                var ErrorAccentColor = CustomPInvoke.UxTheme.GetAccentColor(AccentColorTypes.ImmersiveSaturatedInlineErrorText);
+                var ErrorAccentColor = Core.PInvoke.UxTheme.GetAccentColor(AccentColorTypes.ImmersiveSaturatedInlineErrorText);
                 await WebView.CoreWebView2.ExecuteScriptAsync(DefinedJavascript);
 
                 await WebView.CoreWebView2.ExecuteScriptAsync($@"
@@ -500,7 +502,7 @@ public partial class MainWindow : Window
         SettingsDialog.OnSettingsChanged += () =>
         {
 #if WINDOWS10_0_17763_0_OR_GREATER
-            SetBackdrop((CustomPInvoke.BackdropType)Enum.Parse(typeof(CustomPInvoke.BackdropType), AppSetting.BackdropType ?? "Mica", ignoreCase: true));
+            SetBackdrop((Core.PInvoke.BackdropType)Enum.Parse(typeof(Core.PInvoke.BackdropType), AppSetting.BackdropType ?? "Mica", ignoreCase: true));
 #endif
             var w = WebView.CoreWebView2;
             if (w != null)
@@ -541,12 +543,12 @@ public partial class MainWindow : Window
         finally { Gdi32.DeleteObject(handle); }
     }
 #if WINDOWS10_0_17763_0_OR_GREATER
-    void SetBackdrop(CustomPInvoke.BackdropType BackdropType) => SetBackdrop((int)BackdropType);
+    void SetBackdrop(Core.PInvoke.BackdropType BackdropType) => SetBackdrop((int)BackdropType);
     void SetBackdrop(int BackdropType)
     {
-        CustomPInvoke.DwmApi.SetWindowAttribute(
+        Core.PInvoke.DwmApi.SetWindowAttribute(
             Handle,
-            CustomPInvoke.DwmApi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+            Core.PInvoke.DwmApi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
             BackdropType);
     }
 #endif

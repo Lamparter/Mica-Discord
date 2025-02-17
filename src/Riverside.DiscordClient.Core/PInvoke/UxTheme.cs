@@ -2,41 +2,9 @@
 using System.Runtime.InteropServices;
 using System.Windows.Media;
 
-namespace CustomPInvoke;
+namespace Riverside.DiscordClient.Core.PInvoke;
 
-public enum BackdropType
-{
-    Regular = 1,
-    Mica = 2, // Mica
-    Acrylic = 3, // Acrylic
-    Tabbed = 4, // Tabbed
-}
-class DwmApi
-{
-    [Flags]
-    enum DWM_SYSTEMBACKDROP_TYPE
-    {
-        DWMSBT_MAINWINDOW = 2, // Mica
-        DWMSBT_TRANSIENTWINDOW = 3, // Acrylic
-        DWMSBT_TABBEDWINDOW = 4 // Tabbed
-    }
-
-
-    [Flags]
-    public enum DWMWINDOWATTRIBUTE
-    {
-        DWMWA_USE_IMMERSIVE_DARK_MODE = 20,
-        DWMWA_SYSTEMBACKDROP_TYPE = 38
-    }
-
-    [DllImport("dwmapi.dll")]
-    static extern int DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
-
-
-    public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)
-        => DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());
-}
-class UxTheme
+public class UxTheme
 {
     [DllImport("uxtheme.dll", EntryPoint = "#94")]
     public static extern int GetImmersiveColorSetCount();
@@ -59,7 +27,7 @@ class UxTheme
     /// <param name="pName">Pointer to a string containing the name preprended with 9 characters (e.g. "Immersive" + name).</param>
     /// <returns>Colour type.</returns>
     [DllImport("uxtheme.dll", EntryPoint = "#96")]
-    public static extern uint GetImmersiveColorTypeFromName(IntPtr pName);
+    public static extern uint GetImmersiveColorTypeFromName(nint pName);
     /// <summary>
     /// Gets the user’s colour set preference (or default colour set if the user isn’t allowed to modify this setting according to group policy).
     /// </summary>
@@ -75,7 +43,7 @@ class UxTheme
     /// <param name="dwIndex">Colour type index (0 to 766/0x2fe).</param>
     /// <returns>Pointer to a string containing the colour type’s name.</returns>
     [DllImport("uxtheme.dll", EntryPoint = "#100")]
-    public static extern IntPtr GetImmersiveColorNamedTypeByIndex(uint dwIndex);
+    public static extern nint GetImmersiveColorNamedTypeByIndex(uint dwIndex);
     public enum AccentColorTypes
     {
         ImmersiveSaturatedHighlight,
@@ -87,7 +55,7 @@ class UxTheme
     public static Color GetAccentColor(AccentColorTypes Type)
     {
         int colourset = GetImmersiveUserColorSetPreference(false, false);
-        IntPtr pElementName = Marshal.StringToHGlobalUni(Type.ToString());
+        nint pElementName = Marshal.StringToHGlobalUni(Type.ToString());
         uint type = GetImmersiveColorTypeFromName(pElementName);
         Marshal.FreeCoTaskMem(pElementName);
         uint colourdword = GetImmersiveColorFromColorSetEx((uint)colourset, type, false, 0);

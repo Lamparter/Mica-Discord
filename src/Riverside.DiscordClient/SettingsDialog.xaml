@@ -1,15 +1,16 @@
-﻿<Grid x:Class="MicaDiscord.SettingsDialog"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MicaDiscord"
-             mc:Ignorable="d" 
-             xmlns:cg="clr-namespace:CustomGrid"
-             xmlns:cp="clr-namespace:CustomPInvoke"
-             Height="450" Width="800"
-             d:Background="DimGray"
-      >
+﻿<Grid
+    x:Class="Riverside.DiscordClient.SettingsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cg="clr-namespace:Riverside.DiscordClient"
+    xmlns:cp="clr-namespace:Riverside.DiscordClient.Core.PInvoke;assembly=Riverside.DiscordClient.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Riverside.DiscordClient"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="800"
+    Height="450"
+    d:Background="DimGray"
+    mc:Ignorable="d">
     <Grid.Resources>
         <DrawingImage x:Key="X_lg">
             <DrawingImage.Drawing>
@@ -20,21 +21,41 @@
             </DrawingImage.Drawing>
         </DrawingImage>
     </Grid.Resources>
-    <Border CornerRadius="30" BorderBrush="White">
+    <Border BorderBrush="White" CornerRadius="30">
         <cg:Overlay>
-            <Border Background="#505050" Opacity="0.25"></Border>
+            <Border Background="#505050" Opacity="0.25" />
             <cg:RowGrid Margin="20">
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Label Foreground="White" VerticalAlignment="Center" FontSize="18" FontFamily="Calibri Light">Settings</Label>
-                    <Button Template="{StaticResource NoDisabledBackground}" cg:CustomGrid.GridType="Auto" VerticalAlignment="Center" Width="40" Height="40" Click="CloseDialog" Foreground="White">
-                        <Image Source="{StaticResource X_lg}"/>
+                    <Label
+                        VerticalAlignment="Center"
+                        FontFamily="Calibri Light"
+                        FontSize="18"
+                        Foreground="White">
+                        Settings
+                    </Label>
+                    <Button
+                        Width="40"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
+                        Click="CloseDialog"
+                        Foreground="White"
+                        Template="{StaticResource NoDisabledBackground}">
+                        <Image Source="{StaticResource X_lg}" />
                     </Button>
                 </cg:ColumnGrid>
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Label Foreground="White" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center" Foreground="White">
                         Backdrop
                     </Label>
-                    <ComboBox cg:CustomGrid.GridType="Auto" VerticalAlignment="Center" x:Name="Backdrop" Background="#3fff" BorderBrush="#00000000" Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}" Foreground="White">
+                    <ComboBox
+                        x:Name="Backdrop"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
+                        Background="#3fff"
+                        BorderBrush="#00000000"
+                        Foreground="White"
+                        Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}">
                         <ComboBox.ItemsSource>
                             <x:Array Type="cp:BackdropType">
                                 <cp:BackdropType>Regular</cp:BackdropType>
@@ -45,66 +66,98 @@
                         </ComboBox.ItemsSource>
                     </ComboBox>
                 </cg:ColumnGrid>
-                <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40" x:Name="OSWarning">
+                <cg:ColumnGrid
+                    x:Name="OSWarning"
+                    cg:CustomGrid.GridType="Pixel"
+                    cg:CustomGrid.GridValue="40">
                     <cg:ColumnGrid.Background>
-                        <SolidColorBrush Color="Yellow" Opacity="0.5"/>
+                        <SolidColorBrush Opacity="0.5" Color="Yellow" />
                     </cg:ColumnGrid.Background>
-                    <Label Foreground="White" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center" Foreground="White">
                         Warning: Your OS Build is less than 22523. Backdrop might not work properly.
                     </Label>
-                    <Button Template="{StaticResource NoDisabledBackground}" cg:CustomGrid.GridType="Auto" Foreground="White" VerticalAlignment="Center" FontFamily="Calibri Light" x:Name="UseBackdropAnyway">
+                    <Button
+                        x:Name="UseBackdropAnyway"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
+                        FontFamily="Calibri Light"
+                        Foreground="White"
+                        Template="{StaticResource NoDisabledBackground}">
                         Enable Anyway
                     </Button>
                 </cg:ColumnGrid>
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Label Foreground="White" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center" Foreground="White">
                         Enable Fluent Design (NOTE: Requires JavaScript and CSS Injection)
                     </Label>
-                    <Button Template="{StaticResource NoDisabledBackground}" cg:CustomGrid.GridType="Auto" Foreground="White" VerticalAlignment="Center" FontFamily="Calibri Light" x:Name="ReplaceBackgroundToggle">
+                    <Button
+                        x:Name="ReplaceBackgroundToggle"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
+                        FontFamily="Calibri Light"
+                        Foreground="White"
+                        Template="{StaticResource NoDisabledBackground}">
                         Enable
                     </Button>
                 </cg:ColumnGrid>
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Label Foreground="White" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center" Foreground="White">
                         Minimized to system tray (requires restart)
                     </Label>
                     <CheckBox
                         x:Name="Systray"
-                        cg:CustomGrid.GridType="Auto"
-                        Foreground="White"
-                        VerticalAlignment="Center"
                         Margin="10"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
                         Checked="SystrayToggled"
-                        Unchecked="SystrayToggled">
-                    </CheckBox>
+                        Foreground="White"
+                        Unchecked="SystrayToggled" />
                 </cg:ColumnGrid>
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Label Foreground="White" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center" Foreground="White">
                         Enable DevTools
                     </Label>
-                    <Button Template="{StaticResource NoDisabledBackground}" cg:CustomGrid.GridType="Auto" Foreground="White" VerticalAlignment="Center" FontFamily="Calibri Light" x:Name="DevTools">
+                    <Button
+                        x:Name="DevTools"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
+                        FontFamily="Calibri Light"
+                        Foreground="White"
+                        Template="{StaticResource NoDisabledBackground}">
                         Enable
                     </Button>
                 </cg:ColumnGrid>
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Label Foreground="White" VerticalAlignment="Center">
+                    <Label VerticalAlignment="Center" Foreground="White">
                         Use Light Color in Dark Mode
                     </Label>
                     <CheckBox
                         x:Name="ModeAwareCSS"
-                        cg:CustomGrid.GridType="Auto"
-                        Foreground="White"
-                        VerticalAlignment="Center"
                         Margin="10"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Auto"
                         Checked="ModeAwareCSSToggled"
-                        Unchecked="ModeAwareCSSToggled">
-                    </CheckBox>
+                        Foreground="White"
+                        Unchecked="ModeAwareCSSToggled" />
                 </cg:ColumnGrid>
                 <cg:ColumnGrid cg:CustomGrid.GridType="Pixel" cg:CustomGrid.GridValue="40">
-                    <Button Template="{StaticResource NoDisabledBackground}" cg:CustomGrid.GridType="Star" Foreground="White" VerticalAlignment="Center" FontFamily="Calibri Light" Click="OpenAppFolder">
+                    <Button
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Star"
+                        Click="OpenAppFolder"
+                        FontFamily="Calibri Light"
+                        Foreground="White"
+                        Template="{StaticResource NoDisabledBackground}">
                         Open App Location Folder
                     </Button>
-                    <Button Template="{StaticResource NoDisabledBackground}" cg:CustomGrid.GridType="Star" Foreground="White" VerticalAlignment="Center" FontFamily="Calibri Light" Click="ReloadCSS" x:Name="ReloadCSSButton">
+                    <Button
+                        x:Name="ReloadCSSButton"
+                        VerticalAlignment="Center"
+                        cg:CustomGrid.GridType="Star"
+                        Click="ReloadCSS"
+                        FontFamily="Calibri Light"
+                        Foreground="White"
+                        Template="{StaticResource NoDisabledBackground}">
                         For Developer: Reload CSS Stylesheet (The CSS.css)
                     </Button>
                 </cg:ColumnGrid>
